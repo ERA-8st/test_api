@@ -1,0 +1,28 @@
+<%= image_tag(@album_image["url"])%>
+<p><%= @song.name %></p>
+
+
+
+
+
+<div class="commenterror">
+        <%= flash[:comment] %>
+    </div>
+    <%= form_with model: @song_comment, local: true  do |f| %>
+    <%= f.text_area :comment, rows:"2",placeholder: "コメント" %>
+    <%= f.hidden_field :song_id , :value => @song.id %>
+    <%= f.submit "送信する", class: "btn btn-sm btn-base-1 mt-20 pull-right" %>
+    <% end %>
+    <table class="table">
+        <% @song_comments.each do |comment| %>
+            <tr>
+                <td><%= comment.user.id %></td>
+                <td><%= comment.comment %></td>
+                <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+            </tr>
+        <% end %>
+    </table>
+    <p><%= @song_comments.count %>comments</p>
+</div>
+
+<%= link_to "戻る", search_musics_path %>
