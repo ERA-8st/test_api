@@ -1,6 +1,42 @@
 <%= image_tag(@album_image["url"])%>
 <p><%= @song.name %></p>
 
+<% if @song_reting.blank? %>
+<%= form_with model: @new_song_reting, local: true do |f| %>
+<div id="star">
+    <%= f.hidden_field :rate, id: :review_star %>
+  </div>
+  <%= f.hidden_field :song_id, :value => @song.id  %>
+  <%= f.submit 'evaluate', class:"btn btn-success" %>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/jquery.raty.js"></script>
+        <script>
+            $('#star').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            scoreName: "song_reting[rate]"
+            });
+        </script>
+    <% end %>
+<% else %>
+<%= form_with model: @song_reting, local: true do |f| %>
+    <div class="star-rate">
+    </div>
+    <%= f.submit 'Re-evaluate', class:"btn btn-success" %>
+            <script>
+            $('.star-rate').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                score: <%= @song_reting.rate %>,
+                scoreName: "song_reting[rate]"
+            });
+            </script> 
+            <% end %>
+<% end %>
+
+
 
 
 
