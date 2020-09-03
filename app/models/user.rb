@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :song_comments, dependent: :destroy
+  has_many :song_retings, dependent: :destroy
+
 end

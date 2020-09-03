@@ -13,6 +13,8 @@ end
 
 def show
   @song = RSpotify::Track.find(params[:id])
+  @song_reting = current_user.song_retings.find_by(song_id: @song.id)
+  @new_song_reting = current_user.song_retings.new
   @album = @song.album
   @album_image = @album.images[1]
   @song_comment = SongComment.new

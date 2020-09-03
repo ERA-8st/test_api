@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_075733) do
+ActiveRecord::Schema.define(version: 2020_09_02_112420) do
 
   create_table "song_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id"
     t.text "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "song_retings", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "song_id"
+    t.float "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
